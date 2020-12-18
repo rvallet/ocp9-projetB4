@@ -282,7 +282,6 @@ public class ComptabiliteDaoImpl extends AbstractDbConsumer implements Comptabil
     }
 
     // ==================== SequenceEcritureComptable - GET ====================
-
     /**
      * Renvoie la séquence d'écriture comptable du code journal {@code vJournalCode} pour l'année {@code vAnnee}.
      *
@@ -291,21 +290,19 @@ public class ComptabiliteDaoImpl extends AbstractDbConsumer implements Comptabil
      * @return {@link SequenceEcritureComptable}
      */
     public SequenceEcritureComptable getSequenceEcritureComptable(String pJournalCode, Integer pAnnee){
-        SequenceEcritureComptable result = null;
         NamedParameterJdbcTemplate vJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource(DataSourcesEnum.MYERP));
         MapSqlParameterSource vSqlParams = new MapSqlParameterSource();
         vSqlParams.addValue(dbColumn.JOURNAL_CODE.getValue(), pJournalCode);
         vSqlParams.addValue(dbColumn.ANNEE.getValue(), pAnnee);
         SequenceEcritureComptableRM vRM = new SequenceEcritureComptableRM();
-        vJdbcTemplate.queryForObject(SQLgetSequenceJournalComptable, vSqlParams, vRM);
-        //TODO
-        return result;
+        SequenceEcritureComptable result = vJdbcTemplate.queryForObject(SQLgetSequenceJournalComptable, vSqlParams, vRM);
+        return result != null ? result : new SequenceEcritureComptable();
     }
 
     /** SQLgetSequenceJournalComptable */
     private static String SQLgetSequenceJournalComptable;
     public void setSQLgetSequenceJournalComptable(String pSQLgetSequenceJournalComptable) {
-        this.SQLgetSequenceJournalComptable = pSQLgetSequenceJournalComptable;
+        SQLgetSequenceJournalComptable = pSQLgetSequenceJournalComptable;
     }
 
 
@@ -316,7 +313,6 @@ public class ComptabiliteDaoImpl extends AbstractDbConsumer implements Comptabil
      */
     @Override
     public void updateSequenceEcritureComptable(SequenceEcritureComptable pSequenceEcritureComptable) {
-        //TODO
         NamedParameterJdbcTemplate vJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource(DataSourcesEnum.MYERP));
         MapSqlParameterSource vSqlParams = new MapSqlParameterSource();
         vSqlParams.addValue(dbColumn.JOURNAL_CODE.getValue(), pSequenceEcritureComptable.getJournalCode());
@@ -328,7 +324,7 @@ public class ComptabiliteDaoImpl extends AbstractDbConsumer implements Comptabil
     /** SQLupdateListLigneEcritureComptable */
     private static String SQLupdateSequenceJournalComptable;
     public void setSQLupdateSequenceJournalComptable(String pSQLupdateSequenceJournalComptable) {
-        this.SQLupdateSequenceJournalComptable = pSQLupdateSequenceJournalComptable;
+        SQLupdateSequenceJournalComptable = pSQLupdateSequenceJournalComptable;
     }
 
 

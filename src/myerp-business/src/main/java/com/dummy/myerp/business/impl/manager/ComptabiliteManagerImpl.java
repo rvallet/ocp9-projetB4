@@ -77,15 +77,18 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(pEcritureComptable.getDate());
         Integer vAnnee = calendar.get(Calendar.YEAR);
-        Integer vDerniereValeur = getDaoProxy().getComptabiliteDao().getSequenceEcritureComptable(vJournalCode, vAnnee).getDerniereValeur();
+        Integer vDerniereValeur = getDaoProxy()
+                .getComptabiliteDao()
+                .getSequenceEcritureComptable(vJournalCode, vAnnee)
+                .getDerniereValeur();
         Integer vNouvelleValeur = 1;
 
         if (vDerniereValeur!=null) {
             vNouvelleValeur += vDerniereValeur;
         }
-        SequenceEcritureComptable vSequenceEcritureComptable= new SequenceEcritureComptable(vJournalCode, vAnnee, vNouvelleValeur);
+        SequenceEcritureComptable vSEC = new SequenceEcritureComptable(vJournalCode, vAnnee, vNouvelleValeur);
         pEcritureComptable.setReference(computeReference(vJournalCode, vAnnee, vNouvelleValeur));
-        getDaoProxy().getComptabiliteDao().updateSequenceEcritureComptable(vSequenceEcritureComptable);
+        getDaoProxy().getComptabiliteDao().updateSequenceEcritureComptable(vSEC);
     }
 
     /**
