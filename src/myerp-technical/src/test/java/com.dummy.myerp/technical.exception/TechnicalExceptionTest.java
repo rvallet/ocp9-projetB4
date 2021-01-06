@@ -3,7 +3,7 @@ package com.dummy.myerp.technical.exception;
 import org.junit.Assert;
 import org.junit.Test;
 
-class TechnicalExceptionTest {
+public class TechnicalExceptionTest {
 
     final String technicalExceptionMessage = "Technical Exception Message";
     final Throwable technicalExceptionCause = new Throwable("Technical Exception Cause");
