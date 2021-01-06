@@ -89,6 +89,21 @@
                 WHERE ecriture_id = :ecriture_id
             </value>
         </property>
+        <property name="SQLupdateSequenceJournalComptable">
+            <value>
+                UPDATE myerp.sequence_ecriture_comptable SET
+                    derniere_valeur = :derniere_valeur
+                WHERE
+                    journal_code = :journal_code AND annee = :annee
+            </value>
+        </property>
+        <property name="SQLgetSequenceJournalComptable">
+            <value>
+                SELECT *
+                FROM myerp.sequence_ecriture_comptable
+                WHERE journal_code = :journal_code AND annee = :annee
+            </value>
+        </property>
     </bean>
 
 </beans>
