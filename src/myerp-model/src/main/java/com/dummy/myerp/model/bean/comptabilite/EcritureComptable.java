@@ -23,8 +23,8 @@ public class EcritureComptable {
     private Integer id;
     /** Journal comptable */
     @NotNull private JournalComptable journal;
-    /** The Reference. */
-    @Pattern(regexp = "\\d{1,5}-\\d{4}/\\d{5}")
+    /** The Reference. (format XX-AAAA/#####, ex : AC-2020/00001) */
+    @Pattern(regexp = "[a-zA-Z0-9]{2}-\\d{4}/\\d{5}")
     private String reference;
     /** The Date. */
     @NotNull private Date date;
@@ -80,7 +80,7 @@ public class EcritureComptable {
      *
      * @return {@link BigDecimal}, {@link BigDecimal#ZERO} si aucun montant au débit
      */
-    // TODO à tester
+    // TODO à tester -- Réalisé
     public BigDecimal getTotalDebit() {
         BigDecimal vRetour = BigDecimal.ZERO;
         for (LigneEcritureComptable vLigneEcritureComptable : listLigneEcriture) {
