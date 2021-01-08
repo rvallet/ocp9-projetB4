@@ -1,8 +1,8 @@
 package com.dummy.myerp.business.impl.manager;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import javax.validation.ConstraintViolation;
@@ -57,10 +57,10 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
     /**
      * {@inheritDoc}
      */
-    // TODO à tester
+    // TODO à tester -- Réalisé
     @Override
     public synchronized void addReference(EcritureComptable pEcritureComptable) {
-        // TODO à implémenter
+        // TODO à implémenter -- Réalisé
         // Bien se réferer à la JavaDoc de cette méthode !
         /* Le principe :
                 1.  Remonter depuis la persitance la dernière valeur de la séquence du journal pour l'année de l'écriture
@@ -110,10 +110,18 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
         return result.toString();
     }
 
+    private String getAnneeFromReference (String pReference) {
+        return pReference.substring(3,7);
+    }
+
+    private String getJournalCodeFromReference (String pReference) {
+        return pReference.substring(0,2);
+    }
+
     /**
      * {@inheritDoc}
      */
-    // TODO à tester
+    // TODO à tester -- Réalisé
     @Override
     public void checkEcritureComptable(EcritureComptable pEcritureComptable) throws FunctionalException {
         this.checkEcritureComptableUnit(pEcritureComptable);
@@ -122,13 +130,13 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
 
 
     /**
-     * Vérifie que l'Ecriture comptable respecte les règles de gestion unitaires,
-     * c'est à dire indépendemment du contexte (unicité de la référence, exercie comptable non cloturé...)
+     * Vérifie que l'Écriture comptable respecte les règles de gestion unitaires,
+     * c'est à dire indépendamment du contexte (unicité de la référence, exercice comptable non clôturé...)
      *
      * @param pEcritureComptable -
-     * @throws FunctionalException Si l'Ecriture comptable ne respecte pas les règles de gestion
+     * @throws FunctionalException Si l'Écriture comptable ne respecte pas les règles de gestion
      */
-    // TODO tests à compléter
+    // TODO tests à compléter -- Réalisé
     protected void checkEcritureComptableUnit(EcritureComptable pEcritureComptable) throws FunctionalException {
         // ===== Vérification des contraintes unitaires sur les attributs de l'écriture
         Set<ConstraintViolation<EcritureComptable>> vViolations = getConstraintValidator().validate(pEcritureComptable);
@@ -166,8 +174,19 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
                 "L'écriture comptable doit avoir au moins deux lignes : une ligne au débit et une ligne au crédit.");
         }
 
-        // TODO ===== RG_Compta_5 : Format et contenu de la référence
+        // TODO ===== RG_Compta_5 : Format et contenu de la référence -- Réalisé
         // vérifier que l'année dans la référence correspond bien à la date de l'écriture, idem pour le code journal...
+        if (!getJournalCodeFromReference(pEcritureComptable.getReference()).equals(pEcritureComptable.getJournal().getCode())) {
+            throw new FunctionalException(
+                "La référence n'est pas au format requis : le code journal ne correspond pas à celui de l'écriture");
+        };
+
+        SimpleDateFormat formatYear = new SimpleDateFormat("yyyy");
+        if (!getAnneeFromReference(pEcritureComptable.getReference()).equals(formatYear.format(pEcritureComptable.getDate()))) {
+            throw new FunctionalException(
+                "La référence n'est pas au format requis : l'année ne correspond pas à celle de l'écriture");
+        };
+
     }
 
 
