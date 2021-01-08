@@ -9,17 +9,24 @@ import org.junit.Test;
 
 public class EcritureComptableTest {
 
+    // ==================== Méthodes utilisées pour les tests ====================
+
+    /**  Création d'une ligne d'écriture comptable (Factorisation) */
     private LigneEcritureComptable createLigne(Integer pCompteComptableNumero, String pDebit, String pCredit) {
         BigDecimal vDebit = pDebit == null ? null : new BigDecimal(pDebit);
         BigDecimal vCredit = pCredit == null ? null : new BigDecimal(pCredit);
         String vLibelle = ObjectUtils.defaultIfNull(vDebit, BigDecimal.ZERO)
                                      .subtract(ObjectUtils.defaultIfNull(vCredit, BigDecimal.ZERO)).toPlainString();
-        LigneEcritureComptable vRetour = new LigneEcritureComptable(new CompteComptable(pCompteComptableNumero),
-                                                                    vLibelle,
-                                                                    vDebit, vCredit);
+        LigneEcritureComptable vRetour = new LigneEcritureComptable(
+                new CompteComptable(pCompteComptableNumero),
+                vLibelle,
+                vDebit,
+                vCredit
+        );
         return vRetour;
     }
 
+    /** L'écriture comptable équilibré pour effectuer les tests */
     private EcritureComptable getEcritureComptableEquilibre(){
         EcritureComptable vEcriture = new EcritureComptable();
 
@@ -31,6 +38,11 @@ public class EcritureComptableTest {
 
         return vEcriture;
     }
+
+    /** Le résultat total attendu de l'écriture comptable équilibré (Débit ou Crédit) */
+    private BigDecimal expectedResult = new BigDecimal(342);
+
+    // ==================== Tests ====================
 
     @Test
     public void isEquilibree() {
@@ -57,11 +69,9 @@ public class EcritureComptableTest {
     public void getTotalDebit(){
         EcritureComptable vEcriture = getEcritureComptableEquilibre();
 
-        BigDecimal expectedResult = new BigDecimal(342);
-
         Assert.assertTrue(
                 "Le total débit ne s'est pas effectué correctement :\n"+vEcriture.toString(),
-                expectedResult.compareTo(vEcriture.getTotalDebit())==0
+                this.expectedResult.compareTo(vEcriture.getTotalDebit())==0
         );
     }
 
@@ -69,11 +79,9 @@ public class EcritureComptableTest {
     public void getTotalCredit(){
         EcritureComptable vEcriture = getEcritureComptableEquilibre();
 
-        BigDecimal expectedResult = new BigDecimal(342);
-
         Assert.assertTrue(
                 "Le total crédit ne s'est pas effectué correctement :\n"+vEcriture.toString(),
-                expectedResult.compareTo(vEcriture.getTotalCredit())==0
+                this.expectedResult.compareTo(vEcriture.getTotalCredit())==0
         );
     }
 
