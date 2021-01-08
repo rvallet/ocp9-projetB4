@@ -20,25 +20,61 @@ public class EcritureComptableTest {
         return vRetour;
     }
 
-    @Test
-    public void isEquilibree() {
-        EcritureComptable vEcriture;
-        vEcriture = new EcritureComptable();
+    private EcritureComptable getEcritureComptableEquilibre(){
+        EcritureComptable vEcriture = new EcritureComptable();
 
         vEcriture.setLibelle("Equilibrée");
         vEcriture.getListLigneEcriture().add(this.createLigne(1, "200.50", null));
-        vEcriture.getListLigneEcriture().add(this.createLigne(1, "100.50", "33"));
-        vEcriture.getListLigneEcriture().add(this.createLigne(2, null, "301"));
-        vEcriture.getListLigneEcriture().add(this.createLigne(2, "40", "7"));
-        Assert.assertTrue(vEcriture.toString(), vEcriture.isEquilibree());
+        vEcriture.getListLigneEcriture().add(this.createLigne(1, "100.50", "33.50"));
+        vEcriture.getListLigneEcriture().add(this.createLigne(2, null, "301.50"));
+        vEcriture.getListLigneEcriture().add(this.createLigne(2, "41", "7"));
+
+        return vEcriture;
+    }
+
+    @Test
+    public void isEquilibree() {
+        EcritureComptable vEcriture = getEcritureComptableEquilibre();
+
+        Assert.assertTrue(
+                "Le calcul d'équilibre d'écriture ne s'est pas effectué correctement :\n"+vEcriture.toString(),
+                vEcriture.isEquilibree()
+        );
 
         vEcriture.getListLigneEcriture().clear();
         vEcriture.setLibelle("Non équilibrée");
         vEcriture.getListLigneEcriture().add(this.createLigne(1, "10", null));
-        vEcriture.getListLigneEcriture().add(this.createLigne(1, "20", "1"));
+        vEcriture.getListLigneEcriture().add(this.createLigne(1, "20", "1.50"));
         vEcriture.getListLigneEcriture().add(this.createLigne(2, null, "30"));
-        vEcriture.getListLigneEcriture().add(this.createLigne(2, "1", "2"));
-        Assert.assertFalse(vEcriture.toString(), vEcriture.isEquilibree());
+        vEcriture.getListLigneEcriture().add(this.createLigne(2, "1.50", "2"));
+        Assert.assertFalse(
+                "Le calcul d'équilibre d'écriture ne s'est pas effectué correctement :\n"+vEcriture.toString(),
+                vEcriture.isEquilibree()
+        );
+    }
+
+    @Test
+    public void getTotalDebit(){
+        EcritureComptable vEcriture = getEcritureComptableEquilibre();
+
+        BigDecimal expectedResult = new BigDecimal(342);
+
+        Assert.assertTrue(
+                "Le total débit ne s'est pas effectué correctement :\n"+vEcriture.toString(),
+                expectedResult.compareTo(vEcriture.getTotalDebit())==0
+        );
+    }
+
+    @Test
+    public void getTotalCredit(){
+        EcritureComptable vEcriture = getEcritureComptableEquilibre();
+
+        BigDecimal expectedResult = new BigDecimal(342);
+
+        Assert.assertTrue(
+                "Le total crédit ne s'est pas effectué correctement :\n"+vEcriture.toString(),
+                expectedResult.compareTo(vEcriture.getTotalCredit())==0
+        );
     }
 
 }
