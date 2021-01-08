@@ -24,7 +24,7 @@ public class EcritureComptable {
     /** Journal comptable */
     @NotNull private JournalComptable journal;
     /** The Reference. (format XX-AAAA/#####, ex : AC-2020/00001) */
-    @Pattern(regexp = "[a-zA-Z0-9]{2}-\\d{4}/\\d{5}")
+    @Pattern(regexp = "[a-zA-Z0-9]{1,5}-\\d{4}/\\d{5}")
     private String reference;
     /** The Date. */
     @NotNull private Date date;
