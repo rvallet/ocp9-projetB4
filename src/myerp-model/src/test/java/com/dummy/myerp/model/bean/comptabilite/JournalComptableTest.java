@@ -8,7 +8,12 @@ public class JournalComptableTest {
 
     // ==================== Tests ====================
     @Test
-    public void getByCode(){
+    public void getJournalComptableByCodeWhenExist(){
+
+    }
+
+    @Test
+    public void getJournalComptableByCodeWhenNotExist(){
 
     }
 }
