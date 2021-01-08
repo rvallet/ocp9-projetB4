@@ -84,6 +84,13 @@
             <scope>test</scope>
         </dependency>-->
 
+        <!-- ========== Test Spring ========== -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
         <!-- ===== Database (pour les tests) ===== -->
         <!-- Pool de connexion -->
         <dependency>

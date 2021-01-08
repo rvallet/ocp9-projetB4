@@ -261,6 +261,15 @@
                 <version>4.13</version>
                 <scope>test</scope>
             </dependency>
+
+            <!-- ===== Test Spring ===== -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${spring.version}</version>
+                <scope>test</scope>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -306,7 +315,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
-                    <version>3.0</version>
+                    <version>3.0.0</version>
                 </plugin>
 
                 <!-- ===== Création des JAR ===== -->
