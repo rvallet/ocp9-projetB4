@@ -11,7 +11,7 @@
         <groupId>com.dummy.myerp</groupId>
         <artifactId>myerp</artifactId>
         <version>1.x.x-SNAPSHOT</version>
-        <relativePath>..</relativePath>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <!-- ===== Maven ===== -->
