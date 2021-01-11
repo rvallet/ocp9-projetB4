@@ -17,7 +17,7 @@ import com.dummy.myerp.technical.exception.FunctionalException;
 public class ComptabiliteManagerImplTest {
 
     private ComptabiliteManagerImpl manager = new ComptabiliteManagerImpl();
-/*    private DaoProxy daoProxy;*/
+    private DaoProxy daoProxy;
 
     private EcritureComptable getEcritureComptable(){
         EcritureComptable vEcritureComptable = new EcritureComptable();
@@ -98,7 +98,7 @@ public class ComptabiliteManagerImplTest {
         manager.checkEcritureComptableContext(vEcritureComptable);
     }*/
 
-/*    @Test
+    @Test
     public void addReference() throws NotFoundException {
         EcritureComptable vEcritureComptable = getEcritureComptable();
         manager.addReference(vEcritureComptable);
@@ -108,6 +108,6 @@ public class ComptabiliteManagerImplTest {
                 daoProxy.getComptabiliteDao().getEcritureComptableByRef(vEcritureComptable.getReference())
         );
 
-    }*/
+    }
 
 }

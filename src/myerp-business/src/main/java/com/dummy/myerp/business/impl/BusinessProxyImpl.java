@@ -30,7 +30,7 @@ public class BusinessProxyImpl implements BusinessProxy {
      *
      * @return {@link BusinessProxyImpl}
      */
-    protected static BusinessProxyImpl getInstance() {
+    public static BusinessProxyImpl getInstance() {
         if (daoProxy == null) {
             throw new UnsatisfiedLinkError("La classe BusinessProxyImpl n'a pas été initialisée.");
         }

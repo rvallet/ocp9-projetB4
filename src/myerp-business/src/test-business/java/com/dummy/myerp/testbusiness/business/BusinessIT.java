@@ -1,5 +1,6 @@
 package com.dummy.myerp.testbusiness.business;
 
+import com.dummy.myerp.business.contrat.BusinessProxy;
 import com.dummy.myerp.business.contrat.manager.ComptabiliteManager;
 import com.dummy.myerp.business.impl.BusinessProxyImpl;
 import com.dummy.myerp.business.impl.TransactionManager;
@@ -20,7 +21,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class BusinessIT {
 
     @Autowired
-    BusinessProxyImpl businessProxy;
+    BusinessProxy businessProxy;
 
     @Autowired
     DaoProxy daoProxy;
