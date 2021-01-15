@@ -15,8 +15,11 @@ import com.dummy.myerp.model.bean.comptabilite.EcritureComptable;
 public class EcritureComptableRM implements RowMapper<EcritureComptable> {
 
     /** JournalComptableDaoCache */
-    private final JournalComptableDaoCache journalComptableDaoCache = new JournalComptableDaoCache();
+    private JournalComptableDaoCache journalComptableDaoCache;
 
+    public EcritureComptableRM() {
+        journalComptableDaoCache = new JournalComptableDaoCache();
+    }
 
     @Override
     public EcritureComptable mapRow(ResultSet pRS, int pRowNum) throws SQLException {
