@@ -12,11 +12,14 @@ import com.dummy.myerp.model.bean.comptabilite.EcritureComptable;
 import com.dummy.myerp.model.bean.comptabilite.JournalComptable;
 import com.dummy.myerp.model.bean.comptabilite.LigneEcritureComptable;
 import com.dummy.myerp.technical.exception.FunctionalException;
+import org.springframework.beans.factory.annotation.Autowired;
 
 
 public class ComptabiliteManagerImplTest {
 
     private ComptabiliteManagerImpl manager = new ComptabiliteManagerImpl();
+
+    @Autowired
     private DaoProxy daoProxy;
 
     private EcritureComptable getEcritureComptable(){
@@ -92,11 +95,11 @@ public class ComptabiliteManagerImplTest {
         manager.checkEcritureComptableUnit(vEcritureComptable);
     }
 
-/*    @Test(expected = NotFoundException.class)
+    @Test(expected = NotFoundException.class)
     public void checkEcritureComptableContext() throws Exception {
         EcritureComptable vEcritureComptable = getEcritureComptable();
         manager.checkEcritureComptableContext(vEcritureComptable);
-    }*/
+    }
 
     @Test
     public void addReference() throws NotFoundException {
