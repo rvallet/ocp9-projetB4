@@ -7,7 +7,7 @@
     <!-- ==================== Databases ==================== -->
     <bean id="dataSourceMYERP" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="org.postgresql.Driver"/>
-        <property name="url" value="jdbc:postgresql://postgresql-remy-vallet.alwaysdata.net:5432/remy-vallet_db_myerp"/>
+        <property name="url" value="jdbc:postgresql://127.0.0.1:5432/remy-vallet_db_myerp"/>
         <property name="username" value="remy-vallet"/>
         <property name="password" value="korian77"/>
     </bean>

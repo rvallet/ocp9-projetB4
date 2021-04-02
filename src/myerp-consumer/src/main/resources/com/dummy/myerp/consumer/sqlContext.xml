@@ -12,63 +12,71 @@
           factory-method="getInstance">
         <property name="SQLgetListCompteComptable">
             <value>
-                SELECT * FROM myerp.compte_comptable
+                SELECT * FROM "remy-vallet_db_myerp".public.compte_comptable
             </value>
         </property>
         <property name="SQLgetListJournalComptable">
             <value>
-                SELECT * FROM myerp.journal_comptable
+                SELECT * FROM "remy-vallet_db_myerp".public.journal_comptable
             </value>
         </property>
         <property name="SQLgetListEcritureComptable">
             <value>
-                SELECT * FROM myerp.ecriture_comptable
+                SELECT * FROM "remy-vallet_db_myerp".public.ecriture_comptable
             </value>
         </property>
         <property name="SQLgetEcritureComptable">
             <value>
-                SELECT * FROM myerp.ecriture_comptable
+                SELECT * FROM "remy-vallet_db_myerp".public.ecriture_comptable
                 WHERE id = :id
             </value>
         </property>
         <property name="SQLgetEcritureComptableByRef">
             <value>
-                SELECT * FROM myerp.ecriture_comptable
+                SELECT * FROM "remy-vallet_db_myerp".public.ecriture_comptable
                 WHERE reference = :reference
             </value>
         </property>
         <property name="SQLloadListLigneEcriture">
             <value>
-                SELECT * FROM myerp.ligne_ecriture_comptable
+                SELECT * FROM "remy-vallet_db_myerp".public.ligne_ecriture_comptable
                 WHERE ecriture_id = :ecriture_id
                 ORDER BY ligne_id
             </value>
         </property>
         <property name="SQLinsertEcritureComptable">
             <value>
-                INSERT INTO myerp.ecriture_comptable (
+                INSERT INTO "remy-vallet_db_myerp".public.ecriture_comptable (
                     id,
                     journal_code, reference, date, libelle
                 ) VALUES (
-                    nextval('myerp.ecriture_comptable_id_seq'),
+                    nextval('"remy-vallet_db_myerp".public.ecriture_comptable_id_seq'),
                     :journal_code, :reference, :date, :libelle
                 )
             </value>
         </property>
         <property name="SQLinsertListLigneEcritureComptable">
             <value>
-                INSERT INTO myerp.ligne_ecriture_comptable (
-                    ecriture_id, ligne_id, compte_comptable_numero, libelle, debit
+                INSERT INTO "remy-vallet_db_myerp".public.ligne_ecriture_comptable (
+                    ecriture_id,
+                    ligne_id,
+                    compte_comptable_numero,
+                    libelle,
+                    debit,
                     credit
                 ) VALUES (
-                    :ecriture_id, :ligne_id, :compte_comptable_numero, :libelle, :debit,
+                    :ecriture_id,
+                    :ligne_id,
+                    :compte_comptable_numero,
+                    :libelle,
+                    :debit,
                     :credit
                 )
             </value>
         </property>
         <property name="SQLupdateEcritureComptable">
             <value>
-                UPDATE myerp.ecriture_comptable SET
+                UPDATE "remy-vallet_db_myerp".public.ecriture_comptable SET
                     journal_code = :journal_code,
                     reference = :reference,
                     date = :date,
@@ -79,28 +87,37 @@
         </property>
         <property name="SQLdeleteEcritureComptable">
             <value>
-                DELETE FROM myerp.ecriture_comptable
+                DELETE FROM "remy-vallet_db_myerp".public.ecriture_comptable
                 WHERE id = :id
             </value>
         </property>
         <property name="SQLdeleteListLigneEcritureComptable">
             <value>
-                DELETE FROM myerp.ligne_ecriture_comptable
+                DELETE FROM "remy-vallet_db_myerp".public.ligne_ecriture_comptable
                 WHERE ecriture_id = :ecriture_id
             </value>
         </property>
         <property name="SQLupdateSequenceJournalComptable">
             <value>
-                UPDATE myerp.sequence_ecriture_comptable SET
+                UPDATE "remy-vallet_db_myerp".public.sequence_ecriture_comptable SET
                     derniere_valeur = :derniere_valeur
                 WHERE
                     journal_code = :journal_code AND annee = :annee
             </value>
         </property>
+        <property name="SQLinsertSequenceJournalComptable">
+            <value>
+                INSERT INTO "remy-vallet_db_myerp".public.sequence_ecriture_comptable (
+                journal_code, annee, derniere_valeur
+                ) VALUES (
+                :journal_code, :annee, :derniere_valeur
+                )
+            </value>
+        </property>
         <property name="SQLgetSequenceJournalComptable">
             <value>
                 SELECT *
-                FROM myerp.sequence_ecriture_comptable
+                FROM "remy-vallet_db_myerp".public.sequence_ecriture_comptable
                 WHERE journal_code = :journal_code AND annee = :annee
             </value>
         </property>

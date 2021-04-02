@@ -3,6 +3,7 @@ package com.dummy.myerp.business.impl.manager;
 import java.math.BigDecimal;
 import java.util.Calendar;
 
+import org.junit.Assert;
 import org.junit.Test;
 import com.dummy.myerp.model.bean.comptabilite.CompteComptable;
 import com.dummy.myerp.model.bean.comptabilite.EcritureComptable;
@@ -86,23 +87,5 @@ public class ComptabiliteManagerImplTest {
         vEcritureComptable.setReference("AB-2022/00001");
         manager.checkEcritureComptableUnit(vEcritureComptable);
     }
-
-/*    @Test(expected = NotFoundException.class)
-    public void checkEcritureComptableContext() throws Exception {
-        EcritureComptable vEcritureComptable = getEcritureComptable();
-        manager.checkEcritureComptableContext(vEcritureComptable);
-    }
-
-    @Test
-    public void addReference() throws NotFoundException {
-        EcritureComptable vEcritureComptable = getEcritureComptable();
-
-        Assert.assertEquals(
-                "... \n",
-                vEcritureComptable,
-                daoProxy.getComptabiliteDao().getEcritureComptableByRef(vEcritureComptable.getReference())
-        );
-
-    }*/
 
 }
