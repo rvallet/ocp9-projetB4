@@ -264,6 +264,107 @@ public class BusinessIT {
 
     }
 
+    @Test
+    @Sql(executionPhase = BEFORE_TEST_METHOD, scripts = "classpath:/sql/clean_dist_demo_data.sql")
+    @Sql(executionPhase = BEFORE_TEST_METHOD, scripts = "classpath:/sql/init_dist_demo_data.sql")
+    @Sql(executionPhase = AFTER_TEST_METHOD, scripts = "classpath:/sql/clean_dist_demo_data.sql")
+    public void insertEcritureComptable_KO() {
+        Assert.assertThrows(
+                "L'écriture comptable ne peut pas être persisté",
+                FunctionalException.class,
+                () -> comptabiliteManager.insertEcritureComptable(new EcritureComptable())
+        );
+    }
+
+    @Test
+    @Sql(executionPhase = BEFORE_TEST_METHOD, scripts = "classpath:/sql/clean_dist_demo_data.sql")
+    @Sql(executionPhase = BEFORE_TEST_METHOD, scripts = "classpath:/sql/init_dist_demo_data.sql")
+    @Sql(executionPhase = AFTER_TEST_METHOD, scripts = "classpath:/sql/clean_dist_demo_data.sql")
+    public void updateEcritureComptable_OK() throws FunctionalException {
+        EcritureComptable ecritureComptable = getEcritureComptableTest();
+        comptabiliteManager.insertEcritureComptable(ecritureComptable);
+
+        String expectedLibelleUpdated = "Updated Libellé";
+        ecritureComptable.setLibelle(expectedLibelleUpdated);
+        ecritureComptable.getListLigneEcriture().forEach(e -> e.setLibelle(expectedLibelleUpdated));
+
+        comptabiliteManager.updateEcritureComptable(ecritureComptable);
+
+        EcritureComptable updatedEcritureComptable = new EcritureComptable();
+        try {
+            updatedEcritureComptable = daoProxy.getComptabiliteDao().getEcritureComptableByRef(ecritureComptable.getReference());
+        } catch (NotFoundException e) {
+            Assert.fail(e.getMessage());
+        }
+
+        Assert.assertEquals(
+                "Mise à jour de Libellé d'écriture comptable",
+                expectedLibelleUpdated,
+                updatedEcritureComptable.getLibelle()
+        );
+
+        updatedEcritureComptable.getListLigneEcriture().forEach( e ->
+                Assert.assertEquals(
+                        "Mise à jour de Libellé de ligne d'écriture",
+                        expectedLibelleUpdated,
+                        e.getLibelle()
+                )
+        );
+    }
+
+    @Test
+    @Sql(executionPhase = BEFORE_TEST_METHOD, scripts = "classpath:/sql/clean_dist_demo_data.sql")
+    @Sql(executionPhase = BEFORE_TEST_METHOD, scripts = "classpath:/sql/init_dist_demo_data.sql")
+    @Sql(executionPhase = AFTER_TEST_METHOD, scripts = "classpath:/sql/clean_dist_demo_data.sql")
+    public void updateEcritureComptable_KO() {
+        EcritureComptable ecritureComptable = getEcritureComptableTest();
+        try {
+            comptabiliteManager.insertEcritureComptable(ecritureComptable);
+        } catch (FunctionalException e) {
+            Assert.fail(e.getMessage());
+        }
+
+        String expectedLibelleUpdated = "Updated Libellé";
+        ecritureComptable.setLibelle(expectedLibelleUpdated);
+        ecritureComptable.getListLigneEcriture().forEach(e -> {
+            e.setLibelle(expectedLibelleUpdated);
+            e.getCompteComptable().setLibelle("null");
+            e.getCompteComptable().setNumero(0);
+        });
+
+        Assert.assertThrows(
+                "L'écriture comptable ne peut pas être mise à jour",
+                Exception.class,
+                () -> comptabiliteManager.updateEcritureComptable(ecritureComptable)
+        );
+    }
+
+    @Test
+    @Sql(executionPhase = BEFORE_TEST_METHOD, scripts = "classpath:/sql/clean_dist_demo_data.sql")
+    @Sql(executionPhase = BEFORE_TEST_METHOD, scripts = "classpath:/sql/init_dist_demo_data.sql")
+    @Sql(executionPhase = AFTER_TEST_METHOD, scripts = "classpath:/sql/clean_dist_demo_data.sql")
+    public void deleteEcritureComptable_OK() throws FunctionalException {
+        EcritureComptable ecritureComptable = getEcritureComptableTest();
+        comptabiliteManager.insertEcritureComptable(ecritureComptable);
+
+        EcritureComptable expectedEcritureComptable = new EcritureComptable();
+
+        try {
+            expectedEcritureComptable = daoProxy.getComptabiliteDao().getEcritureComptableByRef(ecritureComptable.getReference());
+        } catch (NotFoundException e) {
+            Assert.fail(e.getMessage());
+        }
+
+        int id = expectedEcritureComptable.getId();
+        comptabiliteManager.deleteEcritureComptable(id);
+
+        Assert.assertThrows(
+                "L'écriture comptable n'est plus en base",
+                NotFoundException.class,
+                () -> daoProxy.getComptabiliteDao().getEcritureComptable(id)
+        );
+    }
+
     private Integer getYear(Date date){
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date == null ? new Date() : date);
@@ -296,12 +397,4 @@ public class BusinessIT {
         );
     }
 
-    @Test
-    public void functionalExceptionWhenInsertEcritureComptable() {
-        Assert.assertThrows(
-                "",
-                FunctionalException.class,
-                () -> comptabiliteManager.insertEcritureComptable(new EcritureComptable())
-        );
-    }
 }
