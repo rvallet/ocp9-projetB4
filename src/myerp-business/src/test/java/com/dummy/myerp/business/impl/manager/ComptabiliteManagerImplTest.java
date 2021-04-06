@@ -3,8 +3,6 @@ package com.dummy.myerp.business.impl.manager;
 import java.math.BigDecimal;
 import java.util.Calendar;
 
-import com.dummy.myerp.consumer.dao.contrat.DaoProxy;
-import com.dummy.myerp.technical.exception.NotFoundException;
 import org.junit.Assert;
 import org.junit.Test;
 import com.dummy.myerp.model.bean.comptabilite.CompteComptable;
@@ -13,11 +11,9 @@ import com.dummy.myerp.model.bean.comptabilite.JournalComptable;
 import com.dummy.myerp.model.bean.comptabilite.LigneEcritureComptable;
 import com.dummy.myerp.technical.exception.FunctionalException;
 
-
 public class ComptabiliteManagerImplTest {
 
     private ComptabiliteManagerImpl manager = new ComptabiliteManagerImpl();
-    private DaoProxy daoProxy;
 
     private EcritureComptable getEcritureComptable(){
         EcritureComptable vEcritureComptable = new EcritureComptable();
@@ -90,24 +86,6 @@ public class ComptabiliteManagerImplTest {
         EcritureComptable vEcritureComptable = getEcritureComptable();
         vEcritureComptable.setReference("AB-2022/00001");
         manager.checkEcritureComptableUnit(vEcritureComptable);
-    }
-
-/*    @Test(expected = NotFoundException.class)
-    public void checkEcritureComptableContext() throws Exception {
-        EcritureComptable vEcritureComptable = getEcritureComptable();
-        manager.checkEcritureComptableContext(vEcritureComptable);
-    }*/
-
-    @Test
-    public void addReference() throws NotFoundException {
-        EcritureComptable vEcritureComptable = getEcritureComptable();
-        manager.addReference(vEcritureComptable);
-        Assert.assertEquals(
-                "... \n",
-                vEcritureComptable,
-                daoProxy.getComptabiliteDao().getEcritureComptableByRef(vEcritureComptable.getReference())
-        );
-
     }
 
 }

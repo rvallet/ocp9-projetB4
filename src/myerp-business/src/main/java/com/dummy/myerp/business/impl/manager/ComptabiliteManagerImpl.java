@@ -77,18 +77,22 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(pEcritureComptable.getDate());
         Integer vAnnee = calendar.get(Calendar.YEAR);
-        Integer vDerniereValeur = getDaoProxy()
+        SequenceEcritureComptable vSequence = getDaoProxy()
                 .getComptabiliteDao()
-                .getSequenceEcritureComptable(vJournalCode, vAnnee)
-                .getDerniereValeur();
+                .getSequenceEcritureComptable(vJournalCode, vAnnee);
+
+        Boolean isSequenceExist = vSequence !=null;
+        Integer vDerniereValeur = isSequenceExist ? vSequence.getDerniereValeur() : null;
         Integer vNouvelleValeur = 1;
 
         if (vDerniereValeur!=null) {
             vNouvelleValeur += vDerniereValeur;
         }
+
         SequenceEcritureComptable vSEC = new SequenceEcritureComptable(vJournalCode, vAnnee, vNouvelleValeur);
         pEcritureComptable.setReference(computeReference(vJournalCode, vAnnee, vNouvelleValeur));
-        getDaoProxy().getComptabiliteDao().updateSequenceEcritureComptable(vSEC);
+        getDaoProxy().getComptabiliteDao().updateSequenceEcritureComptable(vSEC, isSequenceExist);
+
     }
 
     /**
@@ -239,6 +243,7 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
      */
     @Override
     public void updateEcritureComptable(EcritureComptable pEcritureComptable) throws FunctionalException {
+        this.checkEcritureComptable(pEcritureComptable);
         TransactionStatus vTS = getTransactionManager().beginTransactionMyERP();
         try {
             getDaoProxy().getComptabiliteDao().updateEcritureComptable(pEcritureComptable);

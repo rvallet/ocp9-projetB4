@@ -98,6 +98,6 @@ public interface ComptabiliteDao {
      *
      * @param pSequenceEcritureComptable -
      */
-    void updateSequenceEcritureComptable(SequenceEcritureComptable pSequenceEcritureComptable);
+    void updateSequenceEcritureComptable(SequenceEcritureComptable pSequenceEcritureComptable, Boolean isUpdate);
 
 }
