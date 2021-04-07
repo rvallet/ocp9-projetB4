@@ -4,8 +4,6 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                         http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
 
-<!-- ========== Get application context ========== -->
-<!--import resource="classpath:/com/dummy/myerp/business/applicationContext.xml"/-->
 <!-- ========== Get consumer context ========== -->
 <import resource="classpath:/com/dummy/myerp/consumer/applicationContext.xml"/>
 <!-- ========== Override databases config ========== -->
