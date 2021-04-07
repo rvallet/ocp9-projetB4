@@ -3,5 +3,8 @@ language: java
 jdk:
   - openjdk8
 
+before_script:
+  - cd ./src
+
 script:
   - mvn clean -P test-business,test-consumer

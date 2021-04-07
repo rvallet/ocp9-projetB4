@@ -177,7 +177,7 @@ public class ConsumerIT {
     comptabiliteDao.insertEcritureComptable(expectedEcritureComptable);
 
     List<EcritureComptable> dbEcritureComptableList = comptabiliteDao.getListEcritureComptable();
-    EcritureComptable dbEcritureComptable = dbEcritureComptableList.get(dbEcritureComptableList.size());
+    EcritureComptable dbEcritureComptable = dbEcritureComptableList.get(dbEcritureComptableList.size()-1);
 
     Assert.assertEquals(
             "Référence de l'écriture comptable",
@@ -222,7 +222,12 @@ public class ConsumerIT {
         ecritureComptable.setDate(new Date());
         ecritureComptable.setLibelle("TI EcritureComptable "+new Date());
         ecritureComptable.setReference("AA-2021/0001");
-        ecritureComptable.setJournal(new JournalComptable());
+        ecritureComptable.setJournal(getJounralComptable());
         return ecritureComptable;
+    }
+
+    private JournalComptable getJounralComptable() {
+        JournalComptable journalComptable = new JournalComptable("AC", "JournalComptable TI");
+        return journalComptable;
     }
 }
