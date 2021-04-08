@@ -55,6 +55,11 @@
         <spring.version>4.3.7.RELEASE</spring.version>
         <surefire.version>3.0.0-M5</surefire.version>
         <postgresql.version>9.4.1212</postgresql.version>
+
+        <!-- ===== Sonar Cloud properties ===== -->
+        <sonar.projectKey>rvallet_ocp9-projetB4</sonar.projectKey>
+        <sonar.organization>rvallet</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
 
 
@@ -371,7 +376,24 @@
                     <artifactId>maven-surefire-report-plugin</artifactId>
                     <version>${surefire.version}</version>
                 </plugin>
-
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <configuration>
+                        <includes>
+                            <include>**/*IT.java</include>
+                        </includes>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>failsafe-integration-tests</id>
+                            <phase>integration-test</phase>
+                            <goals>
+                                <goal>integration-test</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
                 <!-- ===== Test / Coverage (JaCoCo - Java Code Coverage) ===== -->
                 <plugin>
                     <groupId>org.jacoco</groupId>
