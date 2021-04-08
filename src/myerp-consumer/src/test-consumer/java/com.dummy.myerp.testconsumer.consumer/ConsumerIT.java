@@ -173,7 +173,6 @@ public class ConsumerIT {
     @Sql(executionPhase = AFTER_TEST_METHOD, scripts = "classpath:/sql/clean_dist_demo_data.sql")
     public void insertEcritureComptable() {
     EcritureComptable expectedEcritureComptable = getEcritureComptableTest();
-    // TODO : feed journal comptable with expected rules
     comptabiliteDao.insertEcritureComptable(expectedEcritureComptable);
 
     List<EcritureComptable> dbEcritureComptableList = comptabiliteDao.getListEcritureComptable();
