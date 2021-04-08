@@ -1,5 +1,4 @@
-[![Build Status](https://travis-ci.org/rvallet/ocp9-projetB4.svg?branch=main)](https://travis-ci.org/rvallet/ocp9-projetB4) [![codecov](https://codecov.io/gh/rvallet/ocp9-projetB4/branch/main/graph/badge.svg?token=EEV6FPUK0E)](https://codecov.io/gh/rvallet/ocp9-projetB4)
-
+[![Travis Build Status](https://travis-ci.org/rvallet/ocp9-projetB4.svg?branch=main)](https://travis-ci.org/rvallet/ocp9-projetB4) [![SonarCloud Coverage](https://sonarcloud.io/api/project_badges/measure?project=rvallet_ocp9-projetB4&metric=coverage)](https://sonarcloud.io/dashboard?id=rvallet_ocp9-projetB4) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=rvallet_ocp9-projetB4&metric=alert_status)](https://sonarcloud.io/dashboard?id=rvallet_ocp9-projetB4) 
 # MyERP
 Tests unitaires et tests d'intégration sur un système de facturation et de comptabilité.
 
