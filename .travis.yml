@@ -5,6 +5,12 @@ jdk:
 
 before_script:
   - cd ./src
+#  - psql -c 'create database XXX;' -U postgres
 
 script:
-  - mvn clean -P test-business,test-consumer
+  - mvn test -B
+#  - mvn xxx test-business, test-consumer
+  - bash <(curl -s https://codecov.io/bash)
+
+services:
+  - postgresql
