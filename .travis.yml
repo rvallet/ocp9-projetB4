@@ -19,9 +19,4 @@ script:
   - mvn clean -P test-business,test-consumer org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=rvallet_ocp9-projetB4 -Dsonar.login=de21cc28458176f9a5cc3287a75fbb28ce645580
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
-
-env:
-  global:
-    - CODECOV_TOKEN=:uuid-repo-token
-
+#  - bash <(curl -s https://codecov.io/bash)

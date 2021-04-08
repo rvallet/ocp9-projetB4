@@ -1,4 +1,5 @@
-[![Build Status](https://travis-ci.org/rvallet/ocp9-projetB4.svg?branch=main)](https://travis-ci.org/rvallet/ocp9-projetB4) [![codecov](https://codecov.io/gh/rvallet/ocp9-projetB4/branch/main/graph/badge.svg?token=EEV6FPUK0E)](https://codecov.io/gh/rvallet/ocp9-projetB4)
+[![Build Status](https://travis-ci.org/rvallet/ocp9-projetB4.svg?branch=main)](https://travis-ci.org/rvallet/ocp9-projetB4) 
+
 
 # MyERP
 Tests unitaires et tests d'intégration sur un système de facturation et de comptabilité.
