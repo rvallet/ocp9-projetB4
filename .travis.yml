@@ -3,13 +3,23 @@ language: java
 jdk:
   - openjdk8
 
+services:
+  - postgresql
+
+addons:
+  sonarcloud:
+    organization: "rvallet"
+
 before_script:
   - cd ./src
 #  - psql -c 'create database XXX;' -U postgres
 
 script:
-  - mvn test -B
+  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=rvallet_ocp9-projetB4
+#  - mvn test -B
 #  - mvn clean -P test-business,test-consumer org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=rvallet_ocp9-projetB4 -Dsonar.login=de21cc28458176f9a5cc3287a75fbb28ce645580
+
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 
@@ -17,5 +27,3 @@ env:
   global:
     - CODECOV_TOKEN=:uuid-repo-token
 
-services:
-  - postgresql
