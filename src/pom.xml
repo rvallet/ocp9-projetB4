@@ -53,13 +53,9 @@
         <!-- ===== Version properties ===== -->
         <log4j.version>2.8.1</log4j.version>
         <spring.version>4.3.7.RELEASE</spring.version>
-        <surefire.version>3.0.0-M5</surefire.version>
+        <surefire.version>2.18.1</surefire.version>
         <postgresql.version>9.4.1212</postgresql.version>
 
-        <!-- ===== Sonar Cloud properties ===== -->
-        <sonar.projectKey>rvallet_ocp9-projetB4</sonar.projectKey>
-        <sonar.organization>rvallet</sonar.organization>
-        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
 
 
@@ -370,6 +366,11 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${surefire.version}</version>
+                    <configuration>
+                        <useSystemClassLoader>true</useSystemClassLoader>
+                        <forkMode>once</forkMode>
+                        <argLine>${jacocoArgLine}</argLine>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -404,6 +405,12 @@
                             <goals>
                                 <goal>prepare-agent</goal>
                             </goals>
+                            <configuration>
+                                <destFile>
+                                    ${project.build.directory}/coverage-reports/jacoco.exec
+                                </destFile>
+                                <propertyName>jacocoArgLine</propertyName>
+                            </configuration>
                         </execution>
                         <execution>
                             <id>report</id>
@@ -411,6 +418,20 @@
                             <goals>
                                 <goal>report</goal>
                             </goals>
+                            <configuration>
+                                <dataFile>${project.build.directory}/coverage-reports/jacoco.exec</dataFile>
+                                <outputDirectory>${project.reporting.outputDirectory}/jacoco</outputDirectory>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>jacoco-check</id>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                            <configuration>
+                                <rules>
+                                </rules>
+                            </configuration>
                         </execution>
                     </executions>
                 </plugin>
