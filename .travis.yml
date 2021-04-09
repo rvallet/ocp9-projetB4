@@ -12,6 +12,8 @@ addons:
     organization: "rvallet"
 
 before_script:
+  - docker-compose -f docker/dev/docker-compose.yml stop
+  - docker-compose -f docker/dev/docker-compose.yml rm -f
   - docker-compose -f docker/dev/docker-compose.yml up -d
   - cd ./src
 #  - psql -c 'create database XXX;' -U postgres
