@@ -4,7 +4,7 @@ jdk:
   - openjdk11
 
 services:
-  - docker
+#  - docker
 #  - postgresql
 
 addons:
@@ -22,7 +22,7 @@ script:
 
 after_script:
 #  - docker-compose -f ../docker/dev/docker-compose.yml stop
-#  - docker-compose -f ../docker/dev/docker-compose.yml rm -f
+"  - docker-compose -f ../docker/dev/docker-compose.yml rm -f
 
 after_success:
 #  - bash <(curl -s https://codecov.io/bash)
