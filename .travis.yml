@@ -4,19 +4,25 @@ jdk:
   - openjdk11
 
 services:
-  - postgresql
+  - docker
+#  - postgresql
 
 addons:
   sonarcloud:
     organization: "rvallet"
 
 before_script:
+  - docker-compose -f docker/dev/docker-compose.yml up -d
   - cd ./src
 #  - psql -c 'create database XXX;' -U postgres
 
 script:
   # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
-  - mvn clean -P test-business,test-consumer org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=rvallet_ocp9-projetB4 -Dsonar.login=de21cc28458176f9a5cc3287a75fbb28ce645580
+  - mvn clean -P test-consumer,test-business org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=rvallet_ocp9-projetB4 -Dsonar.login=de21cc28458176f9a5cc3287a75fbb28ce645580
+
+after_script:
+  - docker-compose -f docker/dev/docker-compose.yml stop
+  - docker-compose -f docker/dev/docker-compose.yml rm -f
 
 after_success:
 #  - bash <(curl -s https://codecov.io/bash)

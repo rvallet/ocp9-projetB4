@@ -1,12 +1,12 @@
 
-CREATE TABLE MYERP.journal_comptable (
+CREATE TABLE public.journal_comptable (
                 code VARCHAR(5) NOT NULL,
                 libelle VARCHAR(150) NOT NULL,
                 CONSTRAINT journal_comptable_pk PRIMARY KEY (code)
 );
 
 
-CREATE TABLE MYERP.sequence_ecriture_comptable (
+CREATE TABLE public.sequence_ecriture_comptable (
                 journal_code VARCHAR(5) NOT NULL,
                 annee INTEGER NOT NULL,
                 derniere_valeur INTEGER NOT NULL,
@@ -14,10 +14,10 @@ CREATE TABLE MYERP.sequence_ecriture_comptable (
 );
 
 
-CREATE SEQUENCE MYERP.ecriture_comptable_id_seq;
+CREATE SEQUENCE public.ecriture_comptable_id_seq;
 
-CREATE TABLE MYERP.ecriture_comptable (
-                id INTEGER NOT NULL DEFAULT nextval('MYERP.ecriture_comptable_id_seq'),
+CREATE TABLE public.ecriture_comptable (
+                id INTEGER NOT NULL DEFAULT nextval('public.ecriture_comptable_id_seq'),
                 journal_code VARCHAR(5) NOT NULL,
                 reference VARCHAR(30),
                 date TIMESTAMP NOT NULL,
@@ -26,16 +26,16 @@ CREATE TABLE MYERP.ecriture_comptable (
 );
 
 
-ALTER SEQUENCE MYERP.ecriture_comptable_id_seq OWNED BY MYERP.ecriture_comptable.id;
+ALTER SEQUENCE public.ecriture_comptable_id_seq OWNED BY public.ecriture_comptable.id;
 
-CREATE TABLE MYERP.compte_comptable (
+CREATE TABLE public.compte_comptable (
                 numero INTEGER NOT NULL,
                 libelle VARCHAR(150) NOT NULL,
                 CONSTRAINT compte_comptable_pk PRIMARY KEY (numero)
 );
 
 
-CREATE TABLE MYERP.ligne_ecriture_comptable (
+CREATE TABLE public.ligne_ecriture_comptable (
                 ecriture_id INTEGER NOT NULL,
                 ligne_id INTEGER NOT NULL,
                 compte_comptable_numero INTEGER NOT NULL,
@@ -46,30 +46,30 @@ CREATE TABLE MYERP.ligne_ecriture_comptable (
 );
 
 
-ALTER TABLE MYERP.sequence_ecriture_comptable ADD CONSTRAINT journal_comptable_sequence_ecriture_comptable_fk
+ALTER TABLE public.sequence_ecriture_comptable ADD CONSTRAINT journal_comptable_sequence_ecriture_comptable_fk
 FOREIGN KEY (journal_code)
-REFERENCES MYERP.journal_comptable (code)
+REFERENCES public.journal_comptable (code)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
-ALTER TABLE MYERP.ecriture_comptable ADD CONSTRAINT journal_comptable_ecriture_comptable_fk
+ALTER TABLE public.ecriture_comptable ADD CONSTRAINT journal_comptable_ecriture_comptable_fk
 FOREIGN KEY (journal_code)
-REFERENCES MYERP.journal_comptable (code)
+REFERENCES public.journal_comptable (code)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
-ALTER TABLE MYERP.ligne_ecriture_comptable ADD CONSTRAINT ecriture_comptable_ligne_ecriture_comptable_fk
+ALTER TABLE public.ligne_ecriture_comptable ADD CONSTRAINT ecriture_comptable_ligne_ecriture_comptable_fk
 FOREIGN KEY (ecriture_id)
-REFERENCES MYERP.ecriture_comptable (id)
+REFERENCES public.ecriture_comptable (id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
-ALTER TABLE MYERP.ligne_ecriture_comptable ADD CONSTRAINT compte_comptable_ligne_ecriture_comptable_fk
+ALTER TABLE public.ligne_ecriture_comptable ADD CONSTRAINT compte_comptable_ligne_ecriture_comptable_fk
 FOREIGN KEY (compte_comptable_numero)
-REFERENCES MYERP.compte_comptable (numero)
+REFERENCES public.compte_comptable (numero)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
