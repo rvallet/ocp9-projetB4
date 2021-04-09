@@ -137,7 +137,7 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                         <configuration>
                             <includes>
-                                <include>**/*IT.java</include>
+                                <include>**/*IT</include>
                                 <include>*Test*</include>
                             </includes>
                         </configuration>
