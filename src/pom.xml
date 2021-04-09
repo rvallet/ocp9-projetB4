@@ -380,19 +380,19 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
-                    <configuration>
-                        <includes>
-                            <include>**/*IT</include>
-                            <include>*Test*</include>
-                        </includes>
-                    </configuration>
                     <executions>
                         <execution>
                             <id>failsafe-integration-tests</id>
                             <phase>integration-test</phase>
                             <goals>
                                 <goal>integration-test</goal>
+                                <goal>verify</goal>
                             </goals>
+                            <configuration>
+                                <includes>
+                                    <include>**/*IT.java</include>
+                                </includes>
+                            </configuration>
                         </execution>
                     </executions>
                 </plugin>
