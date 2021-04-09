@@ -371,6 +371,11 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-report-plugin</artifactId>
                     <version>${surefire.version}</version>
+                    <configuration>
+                        <useSystemClassLoader>true</useSystemClassLoader>
+                        <forkMode>once</forkMode>
+                        <argLine>${jacocoArgLine}</argLine>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
