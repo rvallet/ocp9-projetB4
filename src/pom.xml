@@ -382,13 +382,17 @@
                     <artifactId>maven-failsafe-plugin</artifactId>
                     <executions>
                         <execution>
-                            <id>failsafe-integration-tests</id>
+<!--                            <id>failsafe-integration-tests</id>-->
+                            <id>integration-tests</id>
                             <phase>integration-test</phase>
                             <goals>
                                 <goal>integration-test</goal>
                                 <goal>verify</goal>
                             </goals>
                             <configuration>
+                                <excludes>
+                                    <exclude>none</exclude>
+                                </excludes>
                                 <includes>
                                     <include>**/*IT.java</include>
                                 </includes>
