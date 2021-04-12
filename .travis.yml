@@ -20,6 +20,7 @@ script:
 #  - mvn clean test-compile failsafe:integration-test
   - mvn clean -P test-consumer,test-business org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=rvallet_ocp9-projetB4 -Dsonar.login=de21cc28458176f9a5cc3287a75fbb28ce645580
 # unactive VPN for tests
+# port change docker
 
 after_script:
   - docker-compose -f ../docker/dev/docker-compose.yml stop
