@@ -18,7 +18,8 @@ script:
   # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
 #  - mvn test -Ptest-consumer,test-business
 #  - mvn clean install -Ptest-consumer,test-business org.jacoco:jacoco-maven-plugin:prepare-agent sonar:sonar -Dsonar.projectKey=rvallet_ocp9-projetB4 -Dsonar.login=de21cc28458176f9a5cc3287a75fbb28ce645580
-  - mvn clean test-compile failsafe:integration-test
+#  - mvn clean test-compile failsafe:integration-test
+  - mvn clean -P test-consumer,test-business org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=rvallet_ocp9-projetB4 -Dsonar.login=de21cc28458176f9a5cc3287a75fbb28ce645580
 
 after_script:
   - docker-compose -f ../docker/dev/docker-compose.yml stop
