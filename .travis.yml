@@ -12,22 +12,17 @@ addons:
 
 before_script:
   - docker-compose -f docker/dev/docker-compose.yml up -d
+  - docker inspect -f '{{.Name}} - {{.NetworkSettings.IPAddress }}' $(docker ps -aq)
   - cd ./src
 
 script:
   # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
-#  - mvn clean install -Ptest-consumer,test-business org.jacoco:jacoco-maven-plugin:prepare-agent sonar:sonar -Dsonar.projectKey=rvallet_ocp9-projetB4 -Dsonar.login=de21cc28458176f9a5cc3287a75fbb28ce645580
-#  - mvn clean test-compile failsafe:integration-test
   - mvn clean -P test-consumer,test-business org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=rvallet_ocp9-projetB4 -Dsonar.login=de21cc28458176f9a5cc3287a75fbb28ce645580
-# unactive VPN for tests
 # port change docker
 
 after_script:
   - docker-compose -f ../docker/dev/docker-compose.yml stop
   - docker-compose -f ../docker/dev/docker-compose.yml rm -f
-
-after_success:
-#  - bash <(curl -s https://codecov.io/bash)
 
 notifications:
 email: false
