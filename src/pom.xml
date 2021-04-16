@@ -375,18 +375,18 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-report-plugin</artifactId>
                     <version>${surefire.version}</version>
-                    <configuration>
+<!--                    <configuration>
                         <useSystemClassLoader>true</useSystemClassLoader>
                         <forkMode>once</forkMode>
                         <argLine>${jacocoArgLine}</argLine>
-                    </configuration>
+                    </configuration>-->
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
                     <executions>
                         <execution>
-                            <id>failsafe-integration-tests</id>
+<!--                            <id>failsafe-integration-tests</id>-->
 <!--                            <id>integration-tests</id>-->
                             <phase>integration-test</phase>
                             <goals>
@@ -394,12 +394,12 @@
                                 <goal>verify</goal>
                             </goals>
                             <configuration>
-                                <excludes>
+<!--                                <excludes>
                                     <exclude>none</exclude>
                                 </excludes>
                                 <includes>
                                     <include>**/*IT.java</include>
-                                </includes>
+                                </includes>-->
                             </configuration>
                         </execution>
                     </executions>
@@ -418,7 +418,7 @@
                                 <destFile>
                                     ${project.build.directory}/coverage-reports/jacoco.exec
                                 </destFile>
-                                <propertyName>jacocoArgLine</propertyName>
+<!--                                <propertyName>jacocoArgLine</propertyName>-->
                             </configuration>
                         </execution>
                         <execution>
