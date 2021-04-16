@@ -56,6 +56,10 @@
         <surefire.version>2.18.1</surefire.version>
         <postgresql.version>9.4.1212</postgresql.version>
 
+        <!-- ===== Sonar Cloud properties ===== -->
+<!--        <sonar.projectKey>rvallet_ocp9-projetB4</sonar.projectKey>
+        <sonar.organization>rvallet</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>-->
     </properties>
 
 
@@ -371,19 +375,19 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-report-plugin</artifactId>
                     <version>${surefire.version}</version>
-                    <configuration>
+<!--                    <configuration>
                         <useSystemClassLoader>true</useSystemClassLoader>
                         <forkMode>once</forkMode>
                         <argLine>${jacocoArgLine}</argLine>
-                    </configuration>
+                    </configuration>-->
                 </plugin>
-                <plugin>
+<!--                <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
                     <executions>
                         <execution>
                             <id>failsafe-integration-tests</id>
-<!--                            <id>integration-tests</id>-->
+                            <id>integration-tests</id>
                             <phase>integration-test</phase>
                             <goals>
                                 <goal>integration-test</goal>
@@ -399,7 +403,7 @@
                             </configuration>
                         </execution>
                     </executions>
-                </plugin>
+                </plugin>-->
                 <!-- ===== Test / Coverage (JaCoCo - Java Code Coverage) ===== -->
                 <plugin>
                     <groupId>org.jacoco</groupId>
@@ -410,12 +414,12 @@
                             <goals>
                                 <goal>prepare-agent</goal>
                             </goals>
-                            <configuration>
+<!--                            <configuration>
                                 <destFile>
                                     ${project.build.directory}/coverage-reports/jacoco.exec
                                 </destFile>
                                 <propertyName>jacocoArgLine</propertyName>
-                            </configuration>
+                            </configuration>-->
                         </execution>
                         <execution>
                             <id>report</id>

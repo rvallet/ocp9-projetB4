@@ -135,12 +135,12 @@
                     </plugin>
                     <plugin>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <configuration>
+<!--                        <configuration>
                             <includes>
                                 <include>**/*IT.java</include>
                                 <include>*Test*</include>
                             </includes>
-                        </configuration>
+                        </configuration>-->
                     </plugin>
                 </plugins>
                 <testResources>
