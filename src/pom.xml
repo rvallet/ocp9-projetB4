@@ -56,6 +56,10 @@
         <surefire.version>2.18.1</surefire.version>
         <postgresql.version>9.4.1212</postgresql.version>
 
+        <!-- ===== Sonar Cloud properties ===== -->
+<!--        <sonar.projectKey>rvallet_ocp9-projetB4</sonar.projectKey>
+        <sonar.organization>rvallet</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>-->
     </properties>
 
 
