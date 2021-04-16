@@ -381,29 +381,29 @@
                         <argLine>${jacocoArgLine}</argLine>
                     </configuration>-->
                 </plugin>
-                <plugin>
+<!--                <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
                     <executions>
                         <execution>
-<!--                            <id>failsafe-integration-tests</id>-->
-<!--                            <id>integration-tests</id>-->
+                            <id>failsafe-integration-tests</id>
+                            <id>integration-tests</id>
                             <phase>integration-test</phase>
                             <goals>
                                 <goal>integration-test</goal>
                                 <goal>verify</goal>
                             </goals>
                             <configuration>
-<!--                                <excludes>
+                                <excludes>
                                     <exclude>none</exclude>
                                 </excludes>
                                 <includes>
                                     <include>**/*IT.java</include>
-                                </includes>-->
+                                </includes>
                             </configuration>
                         </execution>
                     </executions>
-                </plugin>
+                </plugin>-->
                 <!-- ===== Test / Coverage (JaCoCo - Java Code Coverage) ===== -->
                 <plugin>
                     <groupId>org.jacoco</groupId>
@@ -414,12 +414,12 @@
                             <goals>
                                 <goal>prepare-agent</goal>
                             </goals>
-                            <configuration>
+<!--                            <configuration>
                                 <destFile>
                                     ${project.build.directory}/coverage-reports/jacoco.exec
                                 </destFile>
-<!--                                <propertyName>jacocoArgLine</propertyName>-->
-                            </configuration>
+                                <propertyName>jacocoArgLine</propertyName>
+                            </configuration>-->
                         </execution>
                         <execution>
                             <id>report</id>
