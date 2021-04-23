@@ -9,7 +9,7 @@
     <!-- ===== Maven ===== -->
     <groupId>com.dummy.myerp</groupId>
     <artifactId>myerp</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <!-- ===== General information ===== -->
@@ -57,9 +57,13 @@
         <postgresql.version>9.4.1212</postgresql.version>
 
         <!-- ===== Sonar Cloud properties ===== -->
-<!--        <sonar.projectKey>rvallet_ocp9-projetB4</sonar.projectKey>
+        <sonar.projectKey>rvallet_ocp9-projetB4</sonar.projectKey>
         <sonar.organization>rvallet</sonar.organization>
-        <sonar.host.url>https://sonarcloud.io</sonar.host.url>-->
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <sonar.login>de21cc28458176f9a5cc3287a75fbb28ce645580</sonar.login>
+        <sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
+        <sonar.language>java</sonar.language>
+        <sonar.moduleKey>${project.artifactId}</sonar.moduleKey>
     </properties>
 
 
@@ -403,7 +407,7 @@
                                 </includes>
                                 <forkCount>1</forkCount>
                                 <reuseForks>false</reuseForks>
-                                <useSystemClassLoader>false</useSystemClassLoader>
+                                <useSystemClassLoader>true</useSystemClassLoader>
                             </configuration>
                         </execution>
                     </executions>
@@ -420,9 +424,9 @@
                             </goals>
                             <configuration>
                                 <destFile>
-                                    ${project.build.directory}/src/coverage-reports/jacoco.exec
+                                    ${project.build.directory}/coverage-reports/jacoco.exec
                                 </destFile>
-<!--                                <propertyName>jacocoArgLine</propertyName>-->
+                                <propertyName>jacocoArgLine</propertyName>
                             </configuration>
                         </execution>
                         <execution>
@@ -432,7 +436,7 @@
                                 <goal>report</goal>
                             </goals>
                             <configuration>
-                                <dataFile>${project.build.directory}/src/coverage-reports/jacoco.exec</dataFile>
+                                <dataFile>${project.build.directory}/coverage-reports/jacoco.exec</dataFile>
                                 <outputDirectory>${project.reporting.outputDirectory}/jacoco</outputDirectory>
                             </configuration>
                         </execution>
