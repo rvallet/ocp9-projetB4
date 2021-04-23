@@ -9,7 +9,7 @@
     <!-- ===== Maven ===== -->
     <groupId>com.dummy.myerp</groupId>
     <artifactId>myerp</artifactId>
-    <version>1.x.x-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <!-- ===== General information ===== -->
@@ -53,7 +53,7 @@
         <!-- ===== Version properties ===== -->
         <log4j.version>2.8.1</log4j.version>
         <spring.version>4.3.7.RELEASE</spring.version>
-        <surefire.version>2.18.1</surefire.version>
+        <surefire.version>2.22.2</surefire.version>
         <postgresql.version>9.4.1212</postgresql.version>
 
         <!-- ===== Sonar Cloud properties ===== -->
@@ -375,35 +375,39 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-report-plugin</artifactId>
                     <version>${surefire.version}</version>
-<!--                    <configuration>
-                        <useSystemClassLoader>true</useSystemClassLoader>
-                        <forkMode>once</forkMode>
-                        <argLine>${jacocoArgLine}</argLine>
-                    </configuration>-->
+                    <configuration>
+                        <forkCount>1</forkCount>
+                        <reuseForks>true</reuseForks>
+                        <useSystemClassLoader>false</useSystemClassLoader>
+                    </configuration>
                 </plugin>
-<!--                <plugin>
+                <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>2.20</version>
                     <executions>
                         <execution>
-                            <id>failsafe-integration-tests</id>
                             <id>integration-tests</id>
-                            <phase>integration-test</phase>
+<!--                            <id>failsafe-integration-tests</id>-->
+<!--                            <phase>integration-test</phase>-->
                             <goals>
                                 <goal>integration-test</goal>
                                 <goal>verify</goal>
                             </goals>
                             <configuration>
-                                <excludes>
-                                    <exclude>none</exclude>
-                                </excludes>
+                                <additionalClasspathElements>
+                                    <additionalClasspathElement>${project.build.directory}/classes</additionalClasspathElement>
+                                </additionalClasspathElements>
                                 <includes>
-                                    <include>**/*IT.java</include>
+<!--                                    <include>**/*IT.java</include>-->
                                 </includes>
+                                <forkCount>1</forkCount>
+                                <reuseForks>false</reuseForks>
+                                <useSystemClassLoader>false</useSystemClassLoader>
                             </configuration>
                         </execution>
                     </executions>
-                </plugin>-->
+                </plugin>
                 <!-- ===== Test / Coverage (JaCoCo - Java Code Coverage) ===== -->
                 <plugin>
                     <groupId>org.jacoco</groupId>
@@ -414,21 +418,21 @@
                             <goals>
                                 <goal>prepare-agent</goal>
                             </goals>
-<!--                            <configuration>
+                            <configuration>
                                 <destFile>
-                                    ${project.build.directory}/coverage-reports/jacoco.exec
+                                    ${project.build.directory}/src/coverage-reports/jacoco.exec
                                 </destFile>
-                                <propertyName>jacocoArgLine</propertyName>
-                            </configuration>-->
+<!--                                <propertyName>jacocoArgLine</propertyName>-->
+                            </configuration>
                         </execution>
                         <execution>
                             <id>report</id>
-                            <phase>test</phase>
+                            <phase>prepare-package</phase>
                             <goals>
                                 <goal>report</goal>
                             </goals>
                             <configuration>
-                                <dataFile>${project.build.directory}/coverage-reports/jacoco.exec</dataFile>
+                                <dataFile>${project.build.directory}/src/coverage-reports/jacoco.exec</dataFile>
                                 <outputDirectory>${project.reporting.outputDirectory}/jacoco</outputDirectory>
                             </configuration>
                         </execution>
@@ -488,7 +492,6 @@
                     <artifactId>build-helper-maven-plugin</artifactId>
                     <version>3.2.0</version>
                 </plugin>
-
 
             </plugins>
         </pluginManagement>
