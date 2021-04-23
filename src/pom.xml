@@ -371,17 +371,17 @@
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${surefire.version}</version>
                 </plugin>
-<!--                <plugin>
+                <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-report-plugin</artifactId>
                     <version>${surefire.version}</version>
-                    <configuration>
+<!--                    <configuration>
                         <useSystemClassLoader>true</useSystemClassLoader>
                         <forkMode>once</forkMode>
                         <argLine>${jacocoArgLine}</argLine>
-                    </configuration>
-                </plugin>-->
-<!--                <plugin>
+                    </configuration>-->
+                </plugin>
+                <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
                     <executions>
@@ -399,7 +399,7 @@
                             </configuration>
                         </execution>
                     </executions>
-                </plugin>-->
+                </plugin>
                 <!-- ===== Test / Coverage (JaCoCo - Java Code Coverage) ===== -->
                 <plugin>
                     <groupId>org.jacoco</groupId>
@@ -410,12 +410,12 @@
                             <goals>
                                 <goal>prepare-agent</goal>
                             </goals>
-<!--                            <configuration>
+                            <configuration>
                                 <destFile>
-                                    ${project.build.directory}/coverage-reports/jacoco.exec
+                                    ${project.build.directory}/src/coverage-reports/jacoco.exec
                                 </destFile>
                                 <propertyName>jacocoArgLine</propertyName>
-                            </configuration>-->
+                            </configuration>
                         </execution>
                         <execution>
                             <id>report</id>
@@ -423,10 +423,10 @@
                             <goals>
                                 <goal>report</goal>
                             </goals>
-<!--                            <configuration>
-                                <dataFile>${project.build.directory}/coverage-reports/jacoco.exec</dataFile>
+                            <configuration>
+                                <dataFile>${project.build.directory}/src/coverage-reports/jacoco.exec</dataFile>
                                 <outputDirectory>${project.reporting.outputDirectory}/jacoco</outputDirectory>
-                            </configuration>-->
+                            </configuration>
                         </execution>
                         <execution>
                             <id>jacoco-check</id>
