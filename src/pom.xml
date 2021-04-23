@@ -375,27 +375,35 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-report-plugin</artifactId>
                     <version>${surefire.version}</version>
-<!--                    <configuration>
-                        <useSystemClassLoader>true</useSystemClassLoader>
-                        <forkMode>once</forkMode>
-                        <argLine>${jacocoArgLine}</argLine>
-                    </configuration>-->
+                    <configuration>
+                        <forkCount>1</forkCount>
+                        <reuseForks>true</reuseForks>
+                        <useSystemClassLoader>false</useSystemClassLoader>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>2.20</version>
                     <executions>
                         <execution>
-                            <id>failsafe-integration-tests</id>
-                            <phase>integration-test</phase>
+                            <id>integration-tests</id>
+<!--                            <id>failsafe-integration-tests</id>-->
+<!--                            <phase>integration-test</phase>-->
                             <goals>
                                 <goal>integration-test</goal>
                                 <goal>verify</goal>
                             </goals>
                             <configuration>
+                                <additionalClasspathElements>
+                                    <additionalClasspathElement>${project.build.directory}/classes</additionalClasspathElement>
+                                </additionalClasspathElements>
                                 <includes>
-                                    <include>**/*IT.java</include>
+<!--                                    <include>**/*IT.java</include>-->
                                 </includes>
+                                <forkCount>1</forkCount>
+                                <reuseForks>false</reuseForks>
+                                <useSystemClassLoader>false</useSystemClassLoader>
                             </configuration>
                         </execution>
                     </executions>
@@ -414,7 +422,7 @@
                                 <destFile>
                                     ${project.build.directory}/src/coverage-reports/jacoco.exec
                                 </destFile>
-                                <propertyName>jacocoArgLine</propertyName>
+<!--                                <propertyName>jacocoArgLine</propertyName>-->
                             </configuration>
                         </execution>
                         <execution>
