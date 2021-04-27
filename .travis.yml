@@ -6,10 +6,6 @@ jdk:
 services:
 #  - docker
 
-#addons:
-#  sonarcloud:
-#    organization: "rvallet"
-
 before_script:
 #  - docker-compose -f docker/dev/docker-compose.yml up -d
 #  - docker inspect --format='{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(docker ps -aq)
@@ -23,9 +19,6 @@ script:
 after_script:
 #  - docker-compose -f ../docker/dev/docker-compose.yml stop
 #  - docker-compose -f ../docker/dev/docker-compose.yml rm -f
-
-git:
-  depth: false
 
 notifications:
   email: false
