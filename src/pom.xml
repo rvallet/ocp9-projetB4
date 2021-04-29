@@ -382,6 +382,7 @@
                         <forkCount>1</forkCount>
                         <reuseForks>true</reuseForks>
                         <useSystemClassLoader>false</useSystemClassLoader>
+                        <argLine>${jacocoArgLine}</argLine>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -391,8 +392,6 @@
                     <executions>
                         <execution>
                             <id>integration-tests</id>
-<!--                            <id>failsafe-integration-tests</id>-->
-<!--                            <phase>integration-test</phase>-->
                             <goals>
                                 <goal>integration-test</goal>
                                 <goal>verify</goal>
@@ -430,7 +429,7 @@
                         </execution>
                         <execution>
                             <id>report</id>
-                            <phase>prepare-package</phase>
+                            <phase>test</phase>
                             <goals>
                                 <goal>report</goal>
                             </goals>
