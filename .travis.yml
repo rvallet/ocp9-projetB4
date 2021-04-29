@@ -20,5 +20,8 @@ after_script:
 #  - docker-compose -f ../docker/dev/docker-compose.yml stop
 #  - docker-compose -f ../docker/dev/docker-compose.yml rm -f
 
+git:
+  depth: false
+
 notifications:
   email: false
